@@ -10,7 +10,7 @@ const VoiceConfig: React.FC = () => {
     return (
         <View>
             <Text>Configura tu voz e idioma</Text>
-            {/* Añadir opciones de configuración aquí */}
+            {/* Opciones de configuración  */}
             <Button title="Finalizar Configuración" onPress={handleConfigComplete} />
         </View>
     );

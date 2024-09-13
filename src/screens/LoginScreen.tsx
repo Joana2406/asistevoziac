@@ -1,13 +1,17 @@
+// src/screens/LoginScreen.tsx
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebaseConfig';
 
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
   Register: undefined;
   VoiceConfig: undefined;
+  ResetPassword: undefined;
 };
 
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -22,11 +26,18 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Lógica de autenticación aquí
-    console.log('Iniciar sesión con:', email, password);
-    // Navegar a otra pantalla si la autenticación es exitosa
-    navigation.navigate('VoiceConfig');
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Por favor, ingrese ambos campos.');
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate('VoiceConfig'); // Navega a la pantalla de configuración de voz si la autenticación es exitosa
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    }
   };
 
   return (
@@ -38,6 +49,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
+        autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
@@ -48,7 +60,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       />
       <Button title="Iniciar Sesión" onPress={handleLogin} />
       <Button title="Registrarse" onPress={() => navigation.navigate('Register')} />
-      <Button title="¿Olvidaste tu contraseña?" onPress={() => {}} />
+      <Button 
+        title="¿Olvidaste tu contraseña?" 
+        onPress={() => navigation.navigate('ResetPassword')} 
+      />
     </View>
   );
 };

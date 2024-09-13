@@ -6,6 +6,9 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import VoiceConfigScreen from '../screens/VoiceConfigScreen';
 import ChatScreen from '../screens/ChatScreen';
+import ResetPasswordScreen from '../screens/ResetPasswordScreen';
+import VoiceSettingsScreen from '../screens/VoiceSettingsScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +20,11 @@ const AppNavigator: React.FC = () => {
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="VoiceConfig" component={VoiceConfigScreen} />
       <Stack.Screen name="Chat" component={ChatScreen} />
+      <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+      <Stack.Screen name="VoiceSettings" component={VoiceSettingsScreen} />
+
     </Stack.Navigator>
+
   );
 };
 

@@ -1,5 +1,5 @@
 // index.tsx
 import { registerRootComponent } from 'expo';
-import App from './src/App'; // Asegúrate de que la ruta sea correcta
+import App from './src/App'; 
 
 registerRootComponent(App);

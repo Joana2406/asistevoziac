@@ -5,7 +5,7 @@ const Admin: React.FC = () => {
     return (
         <View>
             <Text>Panel de Administración</Text>
-            {/* Añadir tabla de usuarios y opciones aquí */}
+            {/* tabla usuarios */}
         </View>
     );
 };
